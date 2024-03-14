@@ -20,9 +20,26 @@ export default function App() {
     }
   ])
 
+  function handleToggleTask(task) {
+    console.log(`Tarefa '${task.text}' marcada como ${!task.done ? 'FEITA' : 'NÃO FEITA'}`)
+
+    const newTasks = tasks.map(t => {
+      if(t.id === task.id) {
+        return {
+          ...t,
+          done: !t.done
+        }
+      }
+      else return t;
+    })
+    setTasks(newTasks)
+  }
+
   function handleDeleteTask(task) {
-    // TODO: Implementar remoção da tarefa do array 'tasks'
     console.log(`Delentando tarefa '${task.text}'`)
+
+    const newTasks = tasks.filter(t => t.id != task.id)
+    setTasks(newTasks)
   }
 
   return (
@@ -37,7 +54,8 @@ export default function App() {
               <Item 
                 key={task.id}
                 task={task}
-                deleteCallback={handleDeleteTask} 
+                handleToggleTask={handleToggleTask}
+                handleDeleteTask={handleDeleteTask} 
               />)
           })}
 
