@@ -1,20 +1,29 @@
+import { useState } from 'react';
 import Item from './Components/Item';
 
 export default function App() {
-  const tasks = [
+  const [tasks, setTasks] = useState([
     {
+      id: 1,
       done: false,
       text: "Tarefa número 1"
     },
     {
+      id: 2,
       done: true,
       text: "Estudar React"
     },
     {
+      id: 3,
       done: false,
       text: "Dar push depois que terminar"
     }
-  ]
+  ])
+
+  function handleDeleteTask(task) {
+    // TODO: Implementar remoção da tarefa do array 'tasks'
+    console.log(`Delentando tarefa '${task.text}'`)
+  }
 
   return (
     <div className='bg-red-700 w-full h-full'>
@@ -24,7 +33,12 @@ export default function App() {
         <main className='bg-green-500 grow w-full py-4 px-5 flex flex-col justify-start gap-3 '>
 
           {tasks.map((task) => {
-            return <Item done={task.done} text={task.text} />
+            return (
+              <Item 
+                key={task.id}
+                task={task}
+                deleteCallback={handleDeleteTask} 
+              />)
           })}
 
         </main>

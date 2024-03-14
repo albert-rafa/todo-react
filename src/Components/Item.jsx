@@ -1,12 +1,16 @@
 import { Trash } from "lucide-react";
 import { useState } from "react";
 
-export default function Item({ done, text }) {
+export default function Item({ task, deleteCallback }) {
 
-  const [taskDone, setTaskDone] = useState(done);
+  const [taskDone, setTaskDone] = useState(task.done);
 
   function handleDoneClick() {
     setTaskDone(prevState => !prevState)
+  }
+
+  function handleDeleteTask() {
+    deleteCallback(task)
   }
 
   return (
@@ -17,10 +21,10 @@ export default function Item({ done, text }) {
       />
 
       <div className={`grow text-md text-wrap align-middle ${taskDone ? 'line-through decoration-1' : ''}`}>
-        {text}
+        {task.text}
       </div>
 
-      <button>
+      <button onClick={handleDeleteTask}>
         <Trash />
       </button>
     </div>
