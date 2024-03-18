@@ -1,23 +1,7 @@
 import Item from "../Components/Item";
 import { Plus } from "lucide-react";
 
-export default function Add({ tasks, updateTasks, addTask }) {
-  function handleToggleTask(task) {
-    const newTasks = tasks.map((t) => {
-      if (t.id === task.id) {
-        return {
-          ...t,
-          done: !t.done,
-        };
-      } else return t;
-    });
-    updateTasks(newTasks);
-  }
-
-  function handleDeleteTask(task) {
-    const newTasks = tasks.filter((t) => t.id != task.id);
-    updateTasks(newTasks);
-  }
+export default function Add({ tasks, toggleTask, deleteTask, addTask }) {
 
   return (
     <div className="w-full h-full flex flex-col gap-3 relative">
@@ -26,8 +10,8 @@ export default function Add({ tasks, updateTasks, addTask }) {
           <Item
             key={task.id}
             task={task}
-            handleToggleTask={handleToggleTask}
-            handleDeleteTask={handleDeleteTask}
+            handleToggleTask={() => toggleTask(task)}
+            handleDeleteTask={() => deleteTask(task)}
           />
         );
       })}

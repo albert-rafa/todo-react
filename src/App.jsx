@@ -23,8 +23,34 @@ export default function App() {
 
   const [showAddPage, setShowAddPage] = useState(false)
 
-  function handleAddTask() {
-    setShowAddPage(true)
+  function handleAddTask(text) {
+    const trimmedText = text.trim()
+    if(trimmedText != '') {
+      const task = {
+        id: Math.random(),
+        done: false,
+        text: trimmedText
+      }
+      const newTasks = [...tasks, task]
+      setTasks(newTasks)
+    }
+  }
+
+  function handleToggleTask(task) {
+    const newTasks = tasks.map(t => {
+      if(t.id === task.id) {
+        return {
+          ...t,
+          done: !t.done
+        }
+      } else return t
+    })
+    setTasks(newTasks)
+  } 
+
+  function handleDeleteTask(task) {
+    const newTasks = tasks.filter((t) => t.id != task.id)
+    setTasks(newTasks)
   }
 
   return (
@@ -36,14 +62,14 @@ export default function App() {
 
           {showAddPage ? 
             <Add 
-              tasks={tasks}
-              updateTasks={setTasks}
+              addTask={handleAddTask}
               close={() => setShowAddPage(false)}
             /> :
             <Tasks 
               tasks={tasks} 
-              updateTasks={setTasks} 
-              addTask={handleAddTask}
+              toggleTask={handleToggleTask}
+              deleteTask={handleDeleteTask}
+              addTask={() => setShowAddPage(true)}
             /> 
           }
 

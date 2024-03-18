@@ -1,21 +1,11 @@
 import { useState } from "react"
 import { Check, X } from 'lucide-react'
 
-export default function Add({ tasks, updateTasks, close }) {
+export default function Add({ addTask, close }) {
     const [text, setText] = useState('')
 
     function handleAdd() {
-        const trimmedText = text.trim()
-        if(trimmedText != '') {
-            const newTask = {
-                id: Math.random(),
-                done: false,
-                text: trimmedText
-            }
-    
-            const newTasks = [...tasks, newTask]
-            updateTasks(newTasks)
-        }
+        addTask(text)
         close()
     }
 
