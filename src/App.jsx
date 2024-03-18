@@ -23,6 +23,10 @@ export default function App() {
 
   const [showAddPage, setShowAddPage] = useState(false)
 
+  function handleAddTask() {
+    setShowAddPage(true)
+  }
+
   return (
     <div className='w-full h-full bg-sky-50'>
       <div className='w-full h-full max-w-lg mx-auto flex flex-col justify-start items-center'>
@@ -31,8 +35,16 @@ export default function App() {
         <main className='grow w-full pt-9 px-7 relative bg-sky-300 rounded-t-[4rem]'>
 
           {showAddPage ? 
-            <Add /> :
-            <Tasks tasks={tasks} updateTasks={setTasks} /> 
+            <Add 
+              tasks={tasks}
+              updateTasks={setTasks}
+              close={() => setShowAddPage(false)}
+            /> :
+            <Tasks 
+              tasks={tasks} 
+              updateTasks={setTasks} 
+              addTask={handleAddTask}
+            /> 
           }
 
         </main>
