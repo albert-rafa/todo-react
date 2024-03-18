@@ -5,14 +5,17 @@ export default function Add({ tasks, updateTasks, close }) {
     const [text, setText] = useState('')
 
     function handleAdd() {
-        const newTask = {
-            id: Math.random(),
-            done: false,
-            text: text
+        const trimmedText = text.trim()
+        if(trimmedText != '') {
+            const newTask = {
+                id: Math.random(),
+                done: false,
+                text: trimmedText
+            }
+    
+            const newTasks = [...tasks, newTask]
+            updateTasks(newTasks)
         }
-
-        const newTasks = [...tasks, newTask]
-        updateTasks(newTasks)
         close()
     }
 
