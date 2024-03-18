@@ -1,25 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Tasks from './Pages/Tasks';
 import Add from './Pages/Add';
 
 export default function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      done: false,
-      text: "Tarefa número 1"
-    },
-    {
-      id: 2,
-      done: true,
-      text: "Estudar React"
-    },
-    {
-      id: 3,
-      done: false,
-      text: "Dar push depois que terminar"
-    }
-  ])
+  const [tasks, setTasks] = useState([])
 
   const [showAddPage, setShowAddPage] = useState(false)
 
@@ -33,6 +17,7 @@ export default function App() {
       }
       const newTasks = [...tasks, task]
       setTasks(newTasks)
+      localStorage.setItem("tasks", JSON.stringify(newTasks))
     }
   }
 
@@ -46,12 +31,19 @@ export default function App() {
       } else return t
     })
     setTasks(newTasks)
+    localStorage.setItem("tasks", JSON.stringify(newTasks))
   } 
 
   function handleDeleteTask(task) {
     const newTasks = tasks.filter((t) => t.id != task.id)
     setTasks(newTasks)
+    localStorage.setItem("tasks", JSON.stringify(newTasks))
   }
+
+  useEffect(() => {
+    const storage = JSON.parse(localStorage.getItem("tasks"))
+    if(storage) setTasks(storage)
+  }, [])
 
   return (
     <div className='w-full h-full bg-sky-50'>
