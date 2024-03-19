@@ -4,7 +4,6 @@ import Add from './Pages/Add';
 
 export default function App() {
   const [tasks, setTasks] = useState([])
-
   const [showAddPage, setShowAddPage] = useState(false)
 
   function handleAddTask(text) {
@@ -46,11 +45,11 @@ export default function App() {
   }, [])
 
   return (
-    <div className='w-full h-full bg-sky-50'>
+    <div className='w-full h-screen bg-sky-50 overflow-hidden'>
       <div className='w-full h-full max-w-lg mx-auto flex flex-col justify-start items-center'>
         <h1 className='w-full mt-3 py-3 text-center text-5xl font-heading font-medium antialiased tracking-wide text-sky-800'>ToDo</h1>
 
-        <main className='grow w-full pt-9 px-7 relative bg-sky-300 rounded-t-[4rem]'>
+        <main className='h-full w-full pt-9 px-7 relative bg-sky-300 rounded-t-[4rem]'>
 
           {showAddPage ? 
             <Add 

@@ -17,9 +17,9 @@ export default function Item({ task, handleToggleTask, handleDeleteTask }) {
         onClick={handleTaskDoneClick}
       />
 
-      <div className={`grow text-md text-wrap align-middle ${taskDone ? 'line-through decoration-1' : ''} text-slate-800`}>
+      <p className={`grow text-md text-wrap break-words hyphens-auto align-middle ${taskDone ? 'line-through decoration-1' : ''} text-slate-800`}>
         {task.text}
-      </div>
+      </p>
 
       <button onClick={() => handleDeleteTask(task)}>
         <Trash className="stroke-slate-600" />
