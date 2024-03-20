@@ -13,7 +13,7 @@ export default function Item({ task, handleToggleTask, handleDeleteTask }) {
   return (
     <div className="px-2 py-1 flex flex-row items-center gap-3">
       <button
-        className={`size-5 ${taskDone ? 'bg-sky-800' : 'bg-transparent'} outline-none rounded-full border-2 border-sky-800`}
+        className={`shrink-0 size-5 ${taskDone ? 'bg-sky-800' : 'bg-transparent'} outline-none rounded-full border-2 border-sky-800`}
         onClick={handleTaskDoneClick}
       />
 
